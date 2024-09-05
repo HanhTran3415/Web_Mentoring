@@ -27,23 +27,23 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    meta: { requiresAuth: true }   // Trang yêu cầu xác thực
+    meta: { requiresAuth: true }   
   },
   {
     path: '/profile',
     name: 'UserProfile',
     component: UserProfile,
-    meta: { requiresAuth: true }   // Trang yêu cầu xác thực
+    meta: { requiresAuth: true }  
   },
   {
     path: '/calendar',
     name: 'Calendar',
     component: Calendar,
-    meta: { requiresAuth: true }   // Trang yêu cầu xác thực
+    meta: { requiresAuth: true }  
   },
   {
     path: '/:catchAll(.*)',
-    redirect: '/login',  // Redirect bất kỳ đường dẫn nào không xác định về trang đăng nhập
+    redirect: '/login',  
   },
 ];
 
@@ -52,20 +52,16 @@ const router = createRouter({
   routes,
 });
 
-// Navigation guard để kiểm tra trạng thái người dùng và điều hướng đúng
 router.beforeEach((to, from, next) => {
   const isAuthenticated = !!localStorage.getItem('currentUser');
   
-  // Kiểm tra xem route yêu cầu xác thực
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isAuthenticated) {
-      // Nếu không xác thực, điều hướng đến trang đăng nhập
       next('/login');
     } else {
       next();
     }
   } else if (to.matched.some(record => record.meta.requiresGuest)) {
-    // Kiểm tra xem route yêu cầu khách
     if (isAuthenticated) {
       // Nếu đã xác thực, điều hướng đến trang chính
       next('/home');
