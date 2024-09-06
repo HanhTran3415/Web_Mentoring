@@ -1,0 +1,42 @@
+.star-rating {
+    display: inline-flex;
+  }
+  
+  .star {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .star.filled {
+    color: gold;
+  }
+  
+  .star:hover {
+    color: #fc0;
+  }
+  
+  form textarea {
+    width: calc(100% - 22px);
+    height: 100px;
+    resize: none;
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  form a-button {
+    background: #999;
+    padding: 10px 20px;
+    color: #fff;
+    border: 1px solid #999;
+    border-radius: 4px;
+    transition: 0.1s;
+    cursor: pointer;
+  }
+  
+  form a-button:hover {
+    background: #fff;
+    color: #666;
+  }

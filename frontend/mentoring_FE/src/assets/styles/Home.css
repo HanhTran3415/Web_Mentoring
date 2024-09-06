@@ -3,71 +3,87 @@
 }
 
 .mentor-cards {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Chia làm 4 cột */
   gap: 20px;
+  justify-content: center; /* Căn giữa các thẻ */
+  position: relative;
+  max-width: 1800px; /* Giới hạn chiều rộng để 4 thẻ mentor vừa khít */
+  margin-left: 50px;
+  margin-right: auto; /* Đảm bảo lưới mentor được căn giữa */
 }
 
+
 .mentor-card {
-  position: relative;
+  position: relative; /* Để phần tử con có thể được định vị tương đối với thẻ này */
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
-  width: 250px;
+  width: 300px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center; /* Center content inside the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  
+  text-align: center;
 }
-
-.mentor-card h2 {
-  margin-top: 0;
+.icon {
+  margin-right: 10px; 
+  vertical-align: middle; 
+}
+.mentor-card h2{
+  text-align: center;
   font-weight: bold;
-  text-transform: uppercase; /* Make text uppercase */
+}
+.mentor-card p{
+  text-align: justify;
+}
+.mentor-details {
+  position: absolute;
+  top: 0;
+  width: 270px;
+  padding: 15px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000; /* Đặt z-index cao hơn để đảm bảo hiển thị trên các phần tử khác */
+  transition: transform 0.3s ease, box-shadow 0.5s ease; 
+  transform: translateX(10px);
+  opacity: 0;
+}
+.mentor-card:hover{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* transition: transform 0.3s ease; */
 }
 
-.mentor-card p {
-  margin: 5px 0;
-  text-align:left;
+.mentor-card:hover .mentor-details {
+  display: block;
+  opacity: 1;
+  transform: translateX(10px); /* Hiển thị chi tiết khi di chuột qua */
 }
 
-.mentor-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #f9f9f9; /* Màu nền sáng hơn khi hover */
+/* Hiển thị mentor-details bên phải cho các thẻ lẻ (odd) */
+.mentor-card:nth-child(odd) .mentor-details {
+  left: 100%; /* Hiển thị phía bên phải */
+  top: 0;
+}
+
+/* Hiển thị mentor-details bên trái cho các thẻ chẵn (even) */
+.mentor-card:nth-child(even) .mentor-details {
+  right: 100%; /* Hiển thị phía bên trái */
+  top: 0;
 }
 
 
 .mentor-avatar {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 10px;
-  margin-left: auto; /* Add auto margins */
+  margin-left: auto;
   margin-right: auto;
-}
-
-.mentor-details {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #f1f1f1;
-  border-radius: 8px;
-}
-
-.search-bar {
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.search-bar input {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 300px;
 }
 
 .connect-button {
@@ -75,15 +91,118 @@
   font-size: 14px;
   font-weight: bold;
   color: #007bff;
-  background-color: #ffffff; /* Button background color */
-  border: 2px solid #007bff; /* Button border color */
+  background-color: #ffffff;
+  border: 2px solid #007bff;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  justify-content: center;
+  
 }
 
 .connect-button:hover {
-  background-color: #007bff; /* Background changes to white on hover */
-  color: #fafafa; /* Text changes to blue on hover */
-  border-color: #007bff; /* Border stays blue */
+  background-color: #007bff;
+  color: #fafafa;
+  border-color: #007bff;
+}
+
+.search-bar {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 16px;
+  background-color: #86c2f7;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: calc(350px * 3 + 32px);
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-bar h1 {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.search-bar input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #1e90ff;
+  outline: none;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pagination-button {
+  padding: 8px;
+  border: none;
+  background: transparent;
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 40px;
+}
+
+.pagination-button:disabled {
+  color: #d6d6d6;
+  cursor: not-allowed;
+}
+
+.pagination-button:not(:disabled):hover {
+  color: #0056b3;
+}
+
+.pagination-page {
+  width: 50px;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination-page.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination-page:hover {
+  background-color: #e0e0e0;
+}
+
+.pagination-info {
+  margin: 0 10px;
+  font-size: 16px;
+}
+
+.pagination-input {
+  width: 70px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
 }

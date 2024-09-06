@@ -11,35 +11,33 @@
 
         <!-- Content Section -->
         <div class="content">
-                <!-- Details Section -->
-                <div class="details">
-            <h4 class="address">Địa chỉ</h4>
-            <p>14 Lam Sơn<br />phường 2 quận Tân Bình</p>
-            <h4 class="mobile">Hotline</h4>
-            <p><a href="#">0373 0404 87</a></p>
-            <h4 class="mail">Email</h4>
-            <p><a href="#">mentoringvn@gmail.com</a></p>
+    <!-- Details Section -->
+        <div class="details">
+            <p class="address"><i class="fas fa-map-marker-alt icon"></i> 14 Lam Sơn, phường 2, quận Tân Bình</p>
+            
+            <p class="mobile"><i class="fas fa-phone-alt icon"></i> 0373 0404 87</p>
+           
+            <p class="mail"><i class="fas fa-envelope icon"></i> mentoringvn@gmail.com</p>
+            
             <a href="https://www.facebook.com/mentoringvn/?ref=embed_page" target="_blank" class="social-link">
                 <i class="fab fa-facebook fa-2x"></i> <!-- Adjust fa-2x for size -->
             </a>
-
         </div>
+        
         <!-- Services Section -->
         <div class="services">
-            <h4>Dịch vụ</h4>
+            <h4><i class="fas fa-concierge-bell icon"></i> Dịch vụ</h4>
             <p><a href="https://mentoring.edu.vn/trac-nghiem-tam-ly">Trắc nghiệm tâm lý</a></p>
             <p><a href="https://mentoring.edu.vn/thau-hieu-ban-than-387493">Thấu hiểu bản thân</a></p>
             <p><a href="https://mentoring.edu.vn/phat-trien-nang-luc">Phát triển năng lực</a></p>
-            <!-- <p><a href="#">Web designing</a></p> -->
         </div>
 
         <!-- Social Media Section -->
         <div class="social-media">
-            <h4>TIN TỨC</h4>
+            <h4><i class="fas fa-newspaper icon"></i> TIN TỨC</h4>
             <p><a href="https://mentoring.edu.vn/bai-viet-tham-khao-2/bai-viet-tham-khao-bai-viet-tham-khao-2"> Câu chuyện chia sẻ</a></p>
             <p><a href="https://mentoring.edu.vn/hoat-dong"> Hoạt động</a></p>
             <p><a href="https://mentoring.edu.vn/lien-he"> Liên hệ</a></p>
-            <!-- <p><a href="https://www.instagram.com/codewithfaraz"><i class="fab fa-instagram"></i> Instagram</a></p> -->
         </div>
 
         <!-- Quick Links Section -->

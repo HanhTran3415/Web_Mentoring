@@ -1,5 +1,5 @@
 .footer {
-  background-color: rgb(93, 95, 100);
+  background-color: rgb(4, 31, 61);
   color: #fefefe;
   position: relative;
   width: 100%;
@@ -9,13 +9,12 @@
 }
 
 .footer .heading {
-  text-decoration: overline;
   font-style: italic;
   color: rgb(0, 206, 206);
   cursor: pointer;
   padding-top: 2px;
   width: 100%;
-  max-width: 100%; 
+  max-width: 100%;
   margin: 0;
   display: flex;
   justify-content: flex-start;
@@ -23,35 +22,38 @@
 }
 
 .footer .logo {
-  max-width: 200px; 
-  width: auto; 
-  height: auto; 
+  max-width: 200px;
+  width: auto;
+  height: auto;
 }
 
 .footer .logo img {
-  width: 100%; 
-  height: 80px; 
+  width: 100%;
+  height: 80px;
 }
-h4{
+
+h4 {
   font-weight: bold;
 }
+
 .footer .center-text {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-left: 20px; 
-  color: #fefefe; 
+  margin-left: 20px;
+  color: #fefefe;
 }
-
 
 .footer .content {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 1.5rem 0;
+  
+  justify-content: center; /* Căn giữa các phần tử */
+  gap: 150px; /* Khoảng cách giữa các phần tử */
+  margin: 3.5rem auto;
 }
 
 .footer .content p {
-  margin-bottom: 1.3rem;
+  margin-bottom: 0.8rem; /* Reduce margin between paragraphs */
 }
 
 .footer .content a {
@@ -64,7 +66,7 @@ h4{
 }
 
 .footer .content h4 {
-  margin-bottom: 1.3rem;
+  margin-bottom: 0.8rem; /* Reduce margin below headings */
   font-size: 19px;
 }
 
@@ -77,10 +79,16 @@ footer {
   color: #fefefe;
 }
 
+.icon {
+  margin-right: 8px; /* Spacing between icon and text */
+  font-size: 18px; /* Size of the icon */
+}
+
 @media (max-width: 767px) {
   .footer .content {
     flex-direction: column;
     font-size: 14px;
+    margin: 0; /* Remove extra margin on smaller screens */
   }
 
   .footer {

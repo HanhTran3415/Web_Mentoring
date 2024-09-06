@@ -1,8 +1,8 @@
 <template>
   <TopNavBar />
   <div class="home">
-    <h1><b>Danh Sách Mentor</b></h1>
     <div class="search-bar">
+      <h1>Tìm kiếm Mentor</h1>
       <input 
         v-model="searchName"
         type="text"
@@ -16,37 +16,60 @@
       <input 
         v-model="searchFreeTime"
         type="text"
-        placeholder="Tìm kiếm theo thời gian rảnh (VD: Mon 13:00)"
+        placeholder="Theo thời gian rảnh (VD: Mon 13:00)"
       />
     </div>
+
+    <!-- Mentor Cards -->
     <div class="mentor-cards">
       <div 
-        v-for="mentor in filteredMentors" 
-        :key="mentor.id" 
-        class="mentor-card"
-        @mouseover="showDetails(mentor.id)"
-        @mouseleave="hideDetails"
-      >
-        <img :src="mentor.avatar" alt="Mentor Avatar" class="mentor-avatar"/>
-        <h2>{{ mentor.name }}</h2>
-        <p><strong>Chức vụ:</strong> {{ mentor.position }}</p>
-        <p><strong>Mentor:</strong> {{ mentor.mentee }} mentees</p>
-        <p><strong>Thời gian rảnh:</strong> {{ mentor.FreeTime }}</p>
-        <p><strong>Chuyên môn:</strong> {{ mentor.Major }}</p> 
-        
+      v-for="mentor in paginatedMentors" 
+      :key="mentor.id" 
+      class="mentor-card"
+      @mouseover="showDetails(mentor.id)"
+      @mouseleave="hideDetails"
+    >
+      <img :src="mentor.avatar" alt="Mentor Avatar" class="mentor-avatar"/>
+      <h2>{{ mentor.name }}</h2>
+      <p class="info"><i class="fas fa-briefcase icon"></i> {{ mentor.position }}</p> <!-- Chức vụ -->
+      <p class="info"><i class="fas fa-graduation-cap icon"></i> {{ mentor.Major }}</p> <!-- Chuyên môn -->
+      <p class="info"><i class="fas fa-user-tie icon"></i> {{ mentor.mentee }} mentees</p> <!-- Mentor -->
+      <p class="info"><i class="fas fa-calendar-day icon"></i> {{ mentor.FreeTime }}</p>
+
         <!-- Nút Kết nối -->
         <button @click="connectMentor(mentor)" class="connect-button">
           Kết nối
         </button>
 
+        <!-- Hiển thị chi tiết mentor -->
         <div v-if="activeMentorId === mentor.id" class="mentor-details">
-          <h3>Chi tiết:</h3>
-          <p><strong>Giới thiệu bản thân:</strong> {{ details[mentor.id].content }}</p>
-          <div v-for="(value, key) in details[mentor.id]['Chủ đề Mentoring']" :key="key">
+          <h2>Chi tiết</h2>
+          <p><strong>Giới thiệu bản thân:</strong> {{ details[mentor.id]?.content }}</p>
+          <div v-for="(value, key) in details[mentor.id]?.['Chủ đề Mentoring']" :key="key">
             <p><strong>{{ key }}:</strong> {{ value }}</p>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Điều hướng trang -->
+    <div class="pagination">
+      <button @click="prevPage" :disabled="currentPage === 1" class="pagination-button">
+        <i class="pagination-icon">‹</i>
+      </button>
+      <button 
+        v-for="page in totalPages" 
+        :key="page"
+        @click="goToPage(page)"
+        :class="['pagination-page', { active: currentPage === page }]"
+      >
+        {{ page }}
+      </button>
+      <button @click="nextPage" :disabled="currentPage === totalPages" class="pagination-button">
+        <i class="pagination-icon">›</i>
+      </button>
+      <span class="pagination-info"> {{ currentPage }} / {{ totalPages }}</span>
+      
     </div>
 
     <!-- Thông báo kết quả -->
@@ -57,7 +80,8 @@
 </template>
 
 <script>
-import TopNavBar from './navigations/NavBar.vue'
+import TopNavBar from './navigations/NavBar.vue';
+
 export default {
   name: 'Home',
   data() {
@@ -69,9 +93,12 @@ export default {
       searchName: '',
       searchMajor: '',
       searchFreeTime: '',
+      currentPage: 1,
+      itemsPerPage: 12,
+      gotoPage: 1,
       notification: {
         message: '',
-        type: '' 
+        type: ''
       }
     };
   },
@@ -102,6 +129,14 @@ export default {
         const freeTimeMatch = mentor.FreeTime.toLowerCase().includes(this.searchFreeTime.toLowerCase());
         return nameMatch && majorMatch && freeTimeMatch;
       });
+    },
+    totalPages() {
+      return Math.ceil(this.filteredMentors.length / this.itemsPerPage);
+    },
+    paginatedMentors() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredMentors.slice(start, end);
     }
   },
   methods: {
@@ -111,6 +146,33 @@ export default {
     hideDetails() {
       this.activeMentorId = null;
     },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.gotoPage = this.currentPage;
+        this.scrollToTop();
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.gotoPage = this.currentPage;
+        this.scrollToTop();
+      }
+    },
+    goToPage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.gotoPage = page;
+        this.scrollToTop();
+      }
+    },
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    },
     async connectMentor(mentor) {
       const connectionData = {
         userId: this.currentUser.id,
@@ -118,7 +180,7 @@ export default {
         userEmail: this.currentUser.email,
         mentorId: mentor.id,
         mentorName: mentor.name,
-        mentorEmail: mentor.email || '', 
+        mentorEmail: mentor.email || '',
         timestamp: new Date().toISOString()
       };
 
@@ -145,16 +207,10 @@ export default {
           message: 'Đã xảy ra lỗi khi gửi yêu cầu kết nối. Vui lòng thử lại sau.',
           type: 'error'
         };
-      } finally {
-        // Xóa thông báo sau 5 giây
-        setTimeout(() => {
-          this.notification.message = '';
-          this.notification.type = '';
-        }, 5000);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

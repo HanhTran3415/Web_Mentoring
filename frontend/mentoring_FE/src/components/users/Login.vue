@@ -74,7 +74,7 @@ export default {
           
           if (user) {
             if (user.password === this.password) {
-              alert('Đăng nhập thành công!');
+              
               localStorage.setItem('currentUser', JSON.stringify(user));
               // Điều hướng đến trang Home sau khi đăng nhập thành công
               this.$router.push('/home');

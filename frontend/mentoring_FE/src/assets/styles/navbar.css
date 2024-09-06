@@ -51,7 +51,7 @@ nav {
 
 .nav-item-list a {
   text-decoration: none;
-  color: #171616;
+  color: #161617;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@ nav {
 }
 
 nav a:hover {
-  color: #a0ebfd;
+  color: #dc0909;
 }
 
 nav a::after {
@@ -88,20 +88,21 @@ nav a:hover::after {
 }
 
 .dropdown-menu {
-  display: none; /* Initially hidden */
+  display: none; 
   position: absolute;
-  top: 100%; /* Position directly below the parent */
-  left: 0; /* Align with the left edge of the parent */
-  background-color: #333;
+  top: 100%; 
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust horizontal position */
+  background-color: #464647;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   list-style: none;
   padding: 0.5rem 0;
-  min-width: 200px; /* Adjust as needed */
-  z-index: 1000; /* Ensure it's above other elements */
-  opacity: 0; /* Initially hidden */
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
-  visibility: hidden; /* Initially hidden */
+  min-width: 200px; 
+  z-index: 1000; 
+  opacity: 0; 
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  visibility: hidden; 
 }
 
 .account-item:hover .dropdown-menu,
@@ -119,13 +120,14 @@ nav a:hover::after {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   transition: color 0.3s ease;
 }
 
 .dropdown-menu li a:hover {
-  color: #a0ebfd;
+  color: #0acafa;
 }
+
 
 
 
