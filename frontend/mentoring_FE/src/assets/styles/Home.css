@@ -1,6 +1,177 @@
 .home {
   padding: 20px;
 }
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.slider-image {
+  min-width: 100%;
+  height: 802px;
+  object-fit: cover;
+}
+
+.slider-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 3rem;
+  width: 50px; /* Adjust width */
+  height: 50px; /* Adjust height */
+  border-radius: 50%; /* Makes the button round */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.slider-container:hover .prev,
+.slider-container:hover .next {
+  opacity: 1;
+}
+
+.prev {
+  left: 10px; /* Adjust left position as needed */
+}
+
+.next {
+  right: 10px; /* Adjust right position as needed */
+}
+
+.prev:focus,
+.next:focus {
+  outline: none;
+}
+
+.search-bar {
+  margin-top: 20px;
+}
+/* tabs */
+.tabs-container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #78a8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tab-radio-group {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 16px;
+}
+
+.radio-button {
+  font-weight: bold;
+  font-size: 24px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+}
+
+/* Hover effect for radio buttons */
+.radio-button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ khi trỏ chuột vào */
+  transform: scale(1.05);
+  background-color: #1890ff;
+  color: white;
+}
+
+.mentor-tabs-wrapper {
+  position: relative; /* Ensure absolute positioning works */
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.mentor-tabs {
+  margin-top: 10px;
+   
+}
+.mentor-tab-pane{
+  font-size: px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+  margin: 30px;
+}
+.mentor-tab-pane:hover{
+  background-color: #e6f7ff; /* Màu nền sáng khi trỏ chuột vào */
+  color: #1890ff; /* Màu chữ khi trỏ chuột vào */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ khi trỏ chuột vào */
+  transform: scale(1.05);
+  
+}
+
+/* Custom styling for the card tabs */
+.mentor-tabs .ant-tabs-card {
+  border: none; /* Remove default border */
+}
+
+.mentor-tabs .ant-tabs-card .ant-tabs-card-bar {
+  display: flex;
+  gap: 10px; /* Space between tabs */
+  background-color: #f0f0f0; /* Light background for the tab bar */
+  border-bottom: 1px solid #d9d9d9;
+  padding: 5px; /* Padding around the tab bar */
+}
+
+.mentor-tabs .ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+  border-radius: 4px;
+  padding: 10px 20px; /* Add padding for better clickable area */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0; /* Ensure no extra margin */
+}
+
+/* Hover effect for tab headers */
+.mentor-tabs .ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab:hover {
+  background-color: #e6f7ff;
+  color: #1890ff;
+}
+
+/* Style for active tab */
+.mentor-tabs .ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+  background-color: #1890ff;
+  color: white;
+}
+
+.mentor-tabs .ant-tabs-content-holder {
+  padding: 16px;
+  background-color: #fafafa;
+  border-radius: 6px;
+}
+
+
+
 
 .mentor-cards {
   display: grid;
@@ -206,3 +377,7 @@
   font-size: 16px;
   text-align: center;
 }
+
+
+
+

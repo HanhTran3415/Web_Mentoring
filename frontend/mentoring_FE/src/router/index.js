@@ -1,16 +1,22 @@
-
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/components/users/Home.vue';
 import Login from '@/components/users/Login.vue';
 import SignUp from '@/components/users/SignUp.vue';
 import UserProfile from '@/components/users/UserProfile.vue';
 import Calendar from '@/components/users/Calendar.vue';
-
+import Feedback from '@/components/users/Feedback.vue';  // Import Feedback component
+import ContactForm from '@/components/users/ContactForm.vue';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/assets/styles/tailwind.css";
+import MentorPage from '@/components/users/Mentor.vue';
 
-// Cấu hình các route với meta fields để xử lý yêu cầu xác thực và khách
 const routes = [
+  {
+    path: '/',
+    name: 'Mentor',
+    component: MentorPage,
+    
+  },
   {
     path: '/',
     name: 'SignUp',
@@ -42,9 +48,23 @@ const routes = [
     meta: { requiresAuth: true }  
   },
   {
+    path: '/feedback',
+    name: 'Feedback',
+    component: Feedback,
+    meta: { requiresAuth: true } 
+  },
+  {
+    path: '/contact',
+    name: 'Contact-Form',
+    component: ContactForm,
+    meta: { requiresAuth: true } 
+  },
+  {
     path: '/:catchAll(.*)',
     redirect: '/login',  
   },
+   
+  
 ];
 
 const router = createRouter({
@@ -63,7 +83,6 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.requiresGuest)) {
     if (isAuthenticated) {
-      // Nếu đã xác thực, điều hướng đến trang chính
       next('/home');
     } else {
       next();

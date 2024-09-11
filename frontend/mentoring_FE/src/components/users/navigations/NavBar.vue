@@ -62,8 +62,9 @@
             </h1>
             <li><a href="#"><i class="bi bi-bell-fill"></i> Mã khuyến mãi</a></li>
             <li><a href="#"><i class="bi bi-gear-fill"></i> Mua gói đặt lịch tư vấn</a></li>
-            <li><a href="#"><i class="bi bi-gear-fill"></i> Góp ý</a></li>
-            <li><a href="#"><i class="bi bi-gear-fill"></i> Trợ giúp và hỗ trợ</a></li>
+            <li><a href="#" @click="navigateToFeedback"><i class="bi bi-gear-fill"></i> Góp ý</a></li>
+
+            <li><a href="#" @click="navigateToContactForm"><i class="bi bi-gear-fill"></i> Trợ giúp và hỗ trợ</a></li>
             <li><a href="#" @click="logout"><i class="bi bi-gear-fill"></i> Đăng xuất</a></li>
           </ul>
         </li>
@@ -98,6 +99,14 @@ export default {
     navigateToProfile() {
       console.log("Navigating to profile");
       this.$router.push({ name: 'UserProfile' }); 
+    },
+    navigateToFeedback(event) {
+      event.preventDefault();
+      this.$router.push({ name: 'Feedback' }); 
+    },
+    navigateToContactForm(event) {
+      event.preventDefault();
+      this.$router.push({ name: 'Contact-Form' }); 
     },
 
     logout() {

@@ -1,6 +1,70 @@
 <template>
   <TopNavBar />
   <div class="home">
+    <div class="slider-container">
+    <div class="slider" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+      <div v-for="(image, index) in images" :key="index" class="slider-image">
+        <img :src="image" />
+      </div>
+    </div>
+    <!-- Left arrow -->
+    <button class="prev" @click="prevImage">‹</button>
+    <!-- Right arrow -->
+    <button class="next" @click="nextImage">›</button>
+  </div>
+
+  <!--Tabs -->
+  <div class="tabs-container">
+  <!-- Radio buttons for switching between Tài liệu and Mentor -->
+  <a-radio-group v-model="selectedTab" class="tab-radio-group">
+    <a-radio-button
+      value="documents"
+      @mouseenter="hideMentorTabs"
+      class="radio-button"
+    >
+      Tài liệu
+    </a-radio-button>
+
+    <a-radio-button
+      value="mentor"
+      @mouseenter="showMentorTabs"
+      class="radio-button"
+      
+    >
+      Mentor
+    </a-radio-button>
+  </a-radio-group>
+
+  <!-- Content for Tài liệu -->
+  <div v-if="selectedTab === 'documents'">
+    <p>Thông tin Tài liệu</p>
+  </div>
+
+  <!-- Mentor Sub-tabs, visible when hovering over "Mentor" -->
+  <div
+    v-if="selectedTab === 'mentor'"
+    class="mentor-tabs-wrapper"
+    @mouseenter="keepMentorTabsVisible"
+    @mouseleave="hideMentorTabs"
+  >
+    <a-tabs
+      v-model:activeKey="activeMentorTab"
+      tab-position="top"
+      class="mentor-tabs"
+      type="card"
+    >
+      <a-tab-pane
+      class="mentor-tab-pane"
+        v-for="mentor in mentorFields"
+        :key="mentor.key"
+        :tab="mentor.name"
+      >
+        {{ mentor.name }}
+      </a-tab-pane>
+    </a-tabs>
+  </div>
+</div>
+
     <div class="search-bar">
       <h1>Tìm kiếm Mentor</h1>
       <input 
@@ -19,6 +83,11 @@
         placeholder="Theo thời gian rảnh (VD: Mon 13:00)"
       />
     </div>
+    
+
+
+
+
 
     <!-- Mentor Cards -->
     <div class="mentor-cards">
@@ -99,9 +168,40 @@ export default {
       notification: {
         message: '',
         type: ''
-      }
+
+      },
+      selectedTab: 'documents', // Controls the selected tab group
+      activeMentorTab: 'mentor-marketing', // Default active sub-tab for Mentor
+      mentorFields: [
+        { key: 'mentor-marketing', name: 'Mentor Marketing' },
+
+        { key: 'mentor-consulting', name: 'Mentor Tư Vấn Khởi Nghiệp' },
+
+        { key: 'mentor-self-awareness', name: 'Mentor Thấu Hiểu Bản Thân' },
+        { key: 'mentor-psychology', name: 'Mentor Tâm Lý Học' },
+        // Add more mentor fields as needed
+      ],
+      // Slider data
+      currentIndex: 0,
+      images: [
+        "https://hubsaigon.vn/wp-content/uploads/2024/08/CHIEN-BINH-SOCIAL-COMMERCE-900x507.png",
+        "https://hubsaigon.vn/wp-content/uploads/2024/08/z5720224038271_9ec52d9275158e2243cd7c1a023a285a-900x503.jpg",
+        "https://hubsaigon.vn/wp-content/uploads/2024/08/kn.jpg",
+        "https://hubsaigon.vn/wp-content/uploads/2024/08/KHOI-NGHIEP-THUC-CHIEN-1.png",
+        "https://hubsaigon.vn/wp-content/uploads/2024/08/PROMT-AI-CONG-SO.jpg"
+      ],
+      sliderInterval: null, // Interval for automatic sliding
     };
   },
+  mounted() {
+  this.startSlider();
+  },
+  beforeDestroy() {
+    this.stopSlider();
+  },
+    
+  
+
   async created() {
     try {
       const mentorResponse = await fetch('http://localhost:3001/mentor');
@@ -121,6 +221,7 @@ export default {
       console.error('Lỗi khi gửi yêu cầu:', error);
     }
   },
+
   computed: {
     filteredMentors() {
       return this.mentors.filter(mentor => {
@@ -139,7 +240,32 @@ export default {
       return this.filteredMentors.slice(start, end);
     }
   },
+  
   methods: {
+    showMentorTabs() {
+      this.selectedTab = 'mentor';
+    },
+    hideMentorTabs() {
+      this.selectedTab = 'documents'; // or any other logic you prefer
+    },
+    keepMentorTabsVisible() {
+      this.selectedTab = 'mentor';
+    },
+    // Slider methods
+    prevImage() {
+    this.currentIndex =
+      this.currentIndex === 0 ? this.images.length - 1 : this.currentIndex - 1;
+    },
+    nextImage() {
+      this.currentIndex = (this.currentIndex + 1) % this.images.length; // Circular sliding
+    },
+    startSlider() {
+      this.sliderInterval = setInterval(this.nextImage, 3000); // Auto slide every 3 seconds
+    },
+    stopSlider() {
+      clearInterval(this.sliderInterval);
+    },
+
     showDetails(id) {
       this.activeMentorId = id;
     },
@@ -212,6 +338,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 @import '@/assets/styles/Home.css';
