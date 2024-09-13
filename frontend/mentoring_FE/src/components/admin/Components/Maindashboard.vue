@@ -1,7 +1,7 @@
 <template>
     <div class="app-main">
             <div class="main-header-line">
-            <h1>Applications Dashboard</h1>
+            <h1>Trang tổng quan ứng dụng</h1>
             <div class="action-buttons">
                 <button class="open-right-area">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -15,7 +15,8 @@
             <div class="chart-container-wrapper">
                 <div class="chart-container">
                 <div class="chart-info-wrapper">
-                    <h2>Applications</h2>
+                    <h2>Ứng dụng
+                    </h2>
                     <span>20.5 K</span>
                 </div>
                 <div class="chart-svg">
@@ -34,7 +35,7 @@
             <div class="chart-container-wrapper">
                 <div class="chart-container">
                 <div class="chart-info-wrapper">
-                    <h2>Shortlisted</h2>
+                    <h2>Danh sách rút gọn</h2>
                     <span>5.5 K</span>
                 </div>
                 <div class="chart-svg">
@@ -53,7 +54,7 @@
             <div class="chart-container-wrapper">
                 <div class="chart-container">
                 <div class="chart-info-wrapper">
-                    <h2>On-hold</h2>
+                    <h2>Đang chờ</h2>
                     <span>10.5 K</span>
                 </div>
                 <div class="chart-svg">
@@ -74,7 +75,7 @@
             <div class="chart-container-wrapper big">
                 <div class="chart-container">
                 <div class="chart-container-header">
-                    <h2>Top Active Jobs</h2>
+                    <h2>Làm việc tích cực</h2>
                     <span>Last 30 days</span>
                 </div>
                 <div class="line-chart">
