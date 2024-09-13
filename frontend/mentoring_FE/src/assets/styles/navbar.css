@@ -128,6 +128,12 @@ nav a:hover::after {
   color: #0acafa;
 }
 
+.greetings{
+  font-size: 20px;
+  padding: 10px;
+  letter-spacing: 0;
+  font-weight: normal;
+}
 
 
 

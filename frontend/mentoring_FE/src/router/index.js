@@ -8,7 +8,9 @@ import Feedback from '@/components/users/Feedback.vue';  // Import Feedback comp
 import ContactForm from '@/components/users/ContactForm.vue';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/assets/styles/tailwind.css";
-import Dashboad from '@/components/users/admin/Dashboard.vue';
+import Dashboad from '@/components/admin/Dashboard.vue';
+import Table from '@/components/admin/Table.vue';
+// import Tablementee from '@/components/admin/Components/Tablementee.vue';
 //import MentorPage from '@/components/users/Mentor.vue';
 
 //import Dashboard from '@/components/users/admin/dashboard.vue';
@@ -63,6 +65,13 @@ const routes = [
     component: Dashboad
  
   },
+  {
+    path: '/table',
+    name: 'Table',
+    component: Table
+ 
+  },
+
   {
     path: '/:catchAll(.*)',
     redirect: '/login',  

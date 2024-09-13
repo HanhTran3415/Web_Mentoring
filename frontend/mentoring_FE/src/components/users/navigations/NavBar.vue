@@ -57,8 +57,8 @@
             </svg>
           </a>
           <ul class="dropdown-menu">
-            <h1 class="display-2 text-white" @click="navigateToProfile">
-             <b>Xin chào</b>  <br> <b>{{ profile.firstName }} {{ profile.lastName }} !</b>
+            <h1 class="display-2 text-white greetings" @click="navigateToProfile">
+             <b class="greetings">Xin chào</b>  <br> <b>{{ profile.firstName }} {{ profile.lastName }}</b>
             </h1>
             <li><a href="#"><i class="bi bi-bell-fill"></i> Mã khuyến mãi</a></li>
             <li><a href="#"><i class="bi bi-gear-fill"></i> Mua gói đặt lịch tư vấn</a></li>
