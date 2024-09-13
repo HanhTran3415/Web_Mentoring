@@ -122,6 +122,7 @@ nav a:hover::after {
   text-decoration: none;
   color: #ffffff;
   transition: color 0.3s ease;
+  font-size: 17px;
 }
 
 .dropdown-menu li a:hover {
