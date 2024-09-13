@@ -8,15 +8,13 @@ import Feedback from '@/components/users/Feedback.vue';  // Import Feedback comp
 import ContactForm from '@/components/users/ContactForm.vue';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/assets/styles/tailwind.css";
-import MentorPage from '@/components/users/Mentor.vue';
+import Dashboad from '@/components/users/admin/Dashboard.vue';
+//import MentorPage from '@/components/users/Mentor.vue';
+
+//import Dashboard from '@/components/users/admin/dashboard.vue';
 
 const routes = [
-  {
-    path: '/',
-    name: 'Mentor',
-    component: MentorPage,
-    
-  },
+
   {
     path: '/',
     name: 'SignUp',
@@ -58,6 +56,12 @@ const routes = [
     name: 'Contact-Form',
     component: ContactForm,
     meta: { requiresAuth: true } 
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboad',
+    component: Dashboad
+ 
   },
   {
     path: '/:catchAll(.*)',
