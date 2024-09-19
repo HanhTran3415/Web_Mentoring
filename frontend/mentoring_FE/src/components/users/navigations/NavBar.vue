@@ -60,8 +60,8 @@
             <h1 class="display-2 text-white greetings" @click="navigateToProfile">
              <b class="greetings">Xin chào</b>  <br> <b>{{ profile.firstName }} {{ profile.lastName }}</b>
             </h1>
-            <li><a href="#"><i class="bi bi-bell-fill"></i> Mã khuyến mãi</a></li>
-            <li><a href="#"><i class="bi bi-gear-fill"></i> Mua gói đặt lịch tư vấn</a></li>
+            <!-- <li><a href="#"><i class="bi bi-bell-fill"></i> Mã khuyến mãi</a></li> -->
+            <li><a href="#" @click="navigateToPricingTable"><i class="bi bi-gear-fill"></i> Đặt lịch tư vấn</a></li>
             <li><a href="#" @click="navigateToFeedback"><i class="bi bi-gear-fill"></i> Góp ý</a></li>
 
             <li><a href="#" @click="navigateToContactForm"><i class="bi bi-gear-fill"></i> Trợ giúp và hỗ trợ</a></li>
@@ -108,7 +108,10 @@ export default {
       event.preventDefault();
       this.$router.push({ name: 'Contact-Form' }); 
     },
-
+    navigateToPricingTable(event) {
+      event.preventDefault();
+      this.$router.push({ name: 'PricingTable' }); 
+    },
     logout() {
     // Xóa tất cả dữ liệu trong localStorage
     localStorage.clear();

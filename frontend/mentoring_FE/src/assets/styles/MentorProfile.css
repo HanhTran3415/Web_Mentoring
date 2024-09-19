@@ -1,0 +1,154 @@
+
+.header {
+    position: relative;
+  }
+  
+  .header-overlay {
+    position: absolute;
+    top: 9px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background: rgba(0, 0, 0, 0.5);  */
+    
+  }
+  
+  .header-overlay .btn {
+    margin-bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+  }
+  
+  .header-overlay .avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .header-overlay .avatar-container img {
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+  }
+  
+  .header-overlay h3 {
+    font-size: 1.5rem;
+  }
+  
+  @media (max-width: 991px) {
+    .header-overlay {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .header-overlay .btn {
+      margin-bottom: 10px;
+    }
+  }
+
+  .card-custom {
+    border-radius: 12px; /* Bo tròn góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    padding: 20px; /* Khoảng cách bên trong */
+    background-color: #f9fafb; /* Màu nền nhẹ nhàng */
+  }
+  
+  .card-header {
+    background-color: #ffffff; /* Màu nền của tiêu đề */
+    border-bottom: 1px solid #e0e0e0; /* Đường viền nhẹ */
+    padding-bottom: 10px; /* Khoảng cách bên dưới */
+    border-radius: 12px;
+  }
+  
+  .biography h5 {
+    font-size: 1.25rem; /* Tăng kích cỡ chữ cho tiêu đề */
+    font-weight: 600; /* Đậm tiêu đề */
+    color: #333; /* Màu chữ của tiêu đề */
+    margin-top: 20px; /* Khoảng cách bên trên */
+  }
+  
+  .biography p {
+    font-size: 1rem; /* Kích thước chữ của nội dung */
+    color: #555; /* Màu chữ nhạt hơn */
+    line-height: 1.6; /* Khoảng cách giữa các dòng */
+    margin-bottom: 15px; /* Khoảng cách dưới của đoạn văn */
+  }
+  .form-control {
+    margin-bottom: 15px; /* Khoảng cách giữa các input */
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .form-control:disabled {
+    background-color: #f0f0f0; /* Màu nền khi không chỉnh sửa */
+  }
+  
+  button {
+    padding: 8px 16px; /* Tăng kích thước nút */
+  }
+  
+  .custom-background {
+    background-color: #d8e9f8; /* Màu nền tổng quan */
+  }
+  
+  .btn-primary {
+    background-color: #007bff; /* Màu nút khi không chỉnh sửa */
+  }
+  
+  .btn-success {
+    background-color: #28a745; /* Màu nút khi đang chỉnh sửa */
+  }
+
+.card-profile {
+    border: none; /* Remove border */
+    background-color: transparent; /* Set background to transparent */
+    
+  }
+  .card-profile-stats i {
+    font-size: 1.0rem; /* Adjust icon size */
+    color: #333; /* Icon color */
+    
+    margin-left: 30px;
+    padding: 5px;
+  }
+  
+  .avatar-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .avatar-container img {
+    border-radius: 50%;
+    max-width: 100px;
+  }
+  
+  .mentor-name {
+    margin-top: 0.5rem;
+    color: #333;
+    font-size: 1.2rem;
+    white-space: nowrap; /* Prevents wrapping */
+  }
+  
+
+  .personal-info p,
+.biography p {
+  margin: 0.5rem 0;
+  
+}
+
+.personal-info i,
+.biography i {
+  color: #333;
+  margin-right: 0.5rem;
+}
+
+.biography h5 {
+  margin-top: 1rem;
+  color: #333;
+}
+  

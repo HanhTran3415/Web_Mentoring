@@ -37,7 +37,7 @@
 
   <!-- Content for Tài liệu -->
   <div v-if="selectedTab === 'documents'">
-    <p>Thông tin Tài liệu</p>
+    <!-- <p>Thông tin Tài liệu</p> -->
   </div>
 
   <!-- Mentor Sub-tabs, visible when hovering over "Mentor" -->
@@ -91,35 +91,39 @@
 
     <!-- Mentor Cards -->
     <div class="mentor-cards">
-      <div 
+    <div 
       v-for="mentor in paginatedMentors" 
       :key="mentor.id" 
       class="mentor-card"
       @mouseover="showDetails(mentor.id)"
       @mouseleave="hideDetails"
     >
-      <img :src="mentor.avatar" alt="Mentor Avatar" class="mentor-avatar"/>
+      <!-- Wrap the avatar in a router-link for navigation -->
+      <router-link :to="{ name: 'ProfileMentors', params: { id: mentor.id } }">
+        <img :src="mentor.avatar" alt="Mentor Avatar" class="mentor-avatar"/>
+      </router-link>
+      
       <h2>{{ mentor.name }}</h2>
       <p class="info"><i class="fas fa-briefcase icon"></i> {{ mentor.position }}</p> <!-- Chức vụ -->
       <p class="info"><i class="fas fa-graduation-cap icon"></i> {{ mentor.Major }}</p> <!-- Chuyên môn -->
       <p class="info"><i class="fas fa-user-tie icon"></i> {{ mentor.mentee }} mentees</p> <!-- Mentor -->
       <p class="info"><i class="fas fa-calendar-day icon"></i> {{ mentor.FreeTime }}</p>
 
-        <!-- Nút Kết nối -->
-        <button @click="connectMentor(mentor)" class="connect-button">
-          Kết nối
-        </button>
+      <!-- Nút Kết nối -->
+      <button @click="connectMentor(mentor)" class="connect-button">
+        Kết nối
+      </button>
 
-        <!-- Hiển thị chi tiết mentor -->
-        <div v-if="activeMentorId === mentor.id" class="mentor-details">
-          <h2>Chi tiết</h2>
-          <p><strong>Giới thiệu bản thân:</strong> {{ details[mentor.id]?.content }}</p>
-          <div v-for="(value, key) in details[mentor.id]?.['Chủ đề Mentoring']" :key="key">
-            <p><strong>{{ key }}:</strong> {{ value }}</p>
-          </div>
+      <!-- Hiển thị chi tiết mentor -->
+      <div v-if="activeMentorId === mentor.id" class="mentor-details">
+        <h2>Chi tiết</h2>
+        <p><strong>Giới thiệu bản thân:</strong> {{ details[mentor.id]?.content }}</p>
+        <div v-for="(value, key) in details[mentor.id]?.['Chủ đề Mentoring']" :key="key">
+          <p><strong>{{ key }}:</strong> {{ value }}</p>
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Điều hướng trang -->
     <div class="pagination">
@@ -194,7 +198,8 @@ export default {
     };
   },
   mounted() {
-  this.startSlider();
+    this.startSlider();
+    this.scrollToTop();
   },
   beforeDestroy() {
     this.stopSlider();

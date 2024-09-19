@@ -10,6 +10,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/assets/styles/tailwind.css";
 import Dashboad from '@/components/admin/Dashboard.vue';
 import Table from '@/components/admin/Table.vue';
+import MentorProfile from '@/components/users/MentorProfile.vue';
+import ProfileMentors from '@/components/mentors/ProfileMentors.vue';
+
 // import Tablementee from '@/components/admin/Components/Tablementee.vue';
 //import MentorPage from '@/components/users/Mentor.vue';
 
@@ -71,6 +74,19 @@ const routes = [
     component: Table
  
   },
+  {
+    path: '/mentorprofile',
+    name: 'MentorProfile',
+    component: MentorProfile
+ 
+  },
+  {
+    path: '/mentor-info/:id',
+    name: 'ProfileMentors',
+    component: ProfileMentors
+ 
+  },
+
 
   {
     path: '/:catchAll(.*)',
@@ -83,6 +99,9 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+router.afterEach((to, from) => {
+  window.scrollTo(0, 0);
 });
 
 router.beforeEach((to, from, next) => {
