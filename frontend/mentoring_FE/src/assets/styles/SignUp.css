@@ -88,3 +88,55 @@ input[type="password"] {
 .loginLink a:hover {
   text-decoration: underline;
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    width: 90%; /* Giảm độ rộng để phù hợp với màn hình nhỏ */
+    padding: 15px; /* Giảm padding để tiết kiệm không gian */
+  }
+
+  h1 {
+    font-size: 24px; /* Giảm kích thước font tiêu đề */
+  }
+
+  .fontLabel {
+    width: auto; /* Để label co giãn hơn */
+    text-align: left; /* Căn trái cho label */
+  }
+
+  .iconBox {
+    width: 35px; /* Giảm kích thước biểu tượng */
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    height: 30px; /* Giảm chiều cao của input */
+    font-size: 12px; /* Giảm kích thước font cho input */
+  }
+
+  .submit {
+    height: 30px; /* Giảm chiều cao của nút submit */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 20px auto; /* Giảm margin trên màn hình rất nhỏ */
+    padding: 10px; /* Giảm padding cho không gian tối ưu */
+  }
+
+  h1 {
+    font-size: 22px; /* Kích thước font nhỏ hơn */
+  }
+
+  .fontLabel {
+    font-size: 12px; /* Kích thước font nhỏ hơn cho label */
+  }
+
+  .submit {
+    height: 28px; /* Giảm chiều cao của nút submit */
+    font-size: 12px; /* Giảm kích thước font cho nút submit */
+  }
+}

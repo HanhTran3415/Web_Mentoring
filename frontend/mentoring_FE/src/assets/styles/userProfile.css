@@ -1486,6 +1486,28 @@
     width: 100%;
     border-radius: 80%;
   }
+
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    
+}
+
+.card-profile-image img {
+    width: 100px; /* Set desired width */
+    height: 100px; /* Set desired height */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    
+    border-radius: 50%; /* Keep it circular */
+    background-image: url('https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'); 
+}
+
+/* Optional: Adjust the padding and margin */
+.card-profile-image {
+    margin-bottom: 1rem; /* Space below the image */
+}
   
   .avatar-sm {
     font-size: .875rem;
@@ -2032,3 +2054,83 @@
   #navbar .navbar {
     margin-bottom: 20px;
   }
+
+  /* Base styles for the navbar */
+.navbar {
+  background-color: #343a40; /* Dark background */
+}
+
+/* Navbar items */
+.navbar .navbar-nav {
+  flex-direction: row; /* Align items in a row */
+}
+
+/* Form styles */
+.navbar .navbar-search {
+  display: flex;
+}
+
+/* Toggle button for mobile view */
+.navbar-toggler {
+  border: none;
+  display: none; /* Initially hidden, shown in media query */
+}
+
+/* Adjust avatar size */
+.avatar {
+  width: 30px;
+  height: 30px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar .navbar-search {
+      display: none; /* Hide search form on mobile */
+  }
+
+  .navbar .navbar-toggler {
+      display: block; /* Show toggle button */
+  }
+
+  .navbar .navbar-collapse {
+      display: none; /* Initially hide collapsible content */
+      flex-direction: column; /* Stack items vertically */
+      width: 100%; /* Full width */
+      background-color: #343a40; /* Match navbar background */
+  }
+
+  .navbar .navbar-collapse.show {
+      display: flex; /* Show collapsible content when toggled */
+  }
+
+  .navbar .navbar-nav {
+      flex-direction: column; /* Stack user info vertically */
+  }
+
+  .navbar .nav-link {
+      padding: 10px 15px; /* Increase padding for touch targets */
+  }
+}
+
+/* Show elements on larger screens */
+@media (min-width: 769px) {
+  .navbar .navbar-search {
+      display: flex; /* Show search form */
+  }
+
+  .navbar .navbar-collapse {
+      display: flex; /* Show collapsible content */
+      flex-direction: row; /* Align items in a row */
+  }
+
+  .navbar .navbar-toggler {
+      display: none; /* Hide toggle button */
+  }
+}
+
+/* Additional styles for the dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position below the navbar */
+  right: 0; /* Align to the right */
+}

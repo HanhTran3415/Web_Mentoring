@@ -36,8 +36,9 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+
+
 body {
-    
   margin: 0;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 1rem;
@@ -48,11 +49,10 @@ body {
   background-color: #fff;
 }
 
-.avatar-wrapper {
+/* .avatar-wrapper {
   position: relative;
   top: 30px;
   left: 100%;
-  
 }
 
 .avatar {
@@ -60,8 +60,7 @@ body {
   height: 100px;
   border-radius: 50%;
   cursor: pointer;
-  
-}
+} */
 
 .avatar:hover {
   border-color: #999;
@@ -81,7 +80,8 @@ h1, h2, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
-h2{
+
+h2 {
   color: #f5f1f1;
 }
 
@@ -94,11 +94,11 @@ abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
   cursor: help;
   border-bottom: 0;
   -webkit-text-decoration-skip-ink: none;
-          text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
 }
 
 address {
@@ -106,6 +106,43 @@ address {
   font-style: normal;
   line-height: inherit;
 }
+
+.avatar-wrapper {
+  display: flex;
+  justify-content: right; 
+  align-items: right; 
+  margin-top: 40px; 
+  max-width: 100%; 
+}
+
+.avatar {
+  width: 100px; /* Kích thước mặc định */
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s; /* Thêm hiệu ứng khi hover */
+}
+
+.avatar:hover {
+  transform: scale(1.05); /* Phóng to một chút khi hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .avatar {
+    width: 80px; /* Kích thước nhỏ hơn cho tablet */
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar {
+    width: 60px; /* Kích thước nhỏ hơn cho mobile */
+    height: 60px;
+  }
+}
+
+
 
 ol,
 ul,

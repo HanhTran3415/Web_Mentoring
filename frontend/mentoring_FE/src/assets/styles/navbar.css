@@ -185,3 +185,40 @@ nav a:hover::after {
     margin: 0;
   }
 }
+
+.menu-toggle {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-toggle div {
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* Responsive styles */
+@media (max-width: 750px) {
+  .nav-items {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 80px; /* Below the nav */
+    right: 0;
+    background: #1c1c1c;
+    width: 100%;
+    flex-direction: column;
+    padding: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .nav-items.active {
+    display: flex; /* Show menu when active */
+  }
+
+  .menu-toggle {
+    display: flex; /* Show toggle button */
+  }
+}

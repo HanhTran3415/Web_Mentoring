@@ -49,7 +49,6 @@ h4 {
   justify-content: center; /* Căn giữa các phần tử */
   gap: 150px; /* Khoảng cách giữa các phần tử */
   margin: 3.5rem auto;
-
 }
 
 .footer .content p {
@@ -76,15 +75,11 @@ footer {
   justify-content: center; /* Căn giữa theo chiều ngang */
   align-items: center; /* Căn giữa theo chiều dọc */
   height: auto;
-  margin:  0;
+  margin: 0;
   background-color: #282727;
   color: #fefefe;
   padding: 5px;
-  
-
-  
 }
-
 
 .icon {
   margin-right: 8px; /* Spacing between icon and text */
@@ -92,16 +87,25 @@ footer {
   color: #fefefe;
 }
 
+/* Responsive styles */
 @media (max-width: 767px) {
   .footer .content {
     flex-direction: column;
     font-size: 14px;
     margin: 0; /* Remove extra margin on smaller screens */
+    gap: 20px; /* Giảm khoảng cách giữa các phần tử */
   }
-
+  p{
+    margin-top: 20px;
+  }
   .footer {
     position: static;
     margin-top: 20px;
+  }
+
+  .footer .center-text {
+    text-align: center; /* Căn giữa văn bản */
+    margin-left: 0; /* Xóa margin bên trái */
   }
 }
 

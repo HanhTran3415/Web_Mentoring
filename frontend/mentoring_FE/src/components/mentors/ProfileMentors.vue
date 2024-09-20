@@ -9,17 +9,11 @@
                 <h2 class="header-mono">Giám đốc TRUNG TÂM HUẤN LUYỆN KỸ NĂNG THẾ HỆ TRẺ</h2>
             </div>
             <!-- Avatar Section -->
-            <!-- <div class="avatar-wrapper">
-                <img id="avatar" src="https://th.bing.com/th/id/OIP.yOD5jRikpBqmzEsOyH4VLAHaHa?rs=1&pid=ImgDetMain" alt="Avatar" class="avatar">
-                <input type="file" id="avatar-input" accept="image/*" style="display:none">
-            </div> -->
-            <div class="profile-page">
-            <!-- Avatar Section -->
             <div class="avatar-wrapper">
-            <img :src="avatarSrc" alt="Avatar" class="avatar" id="avatar" @click="triggerFileInput" />
-            <input type="file" id="avatar-input" accept="image/*" @change="onAvatarChange" ref="avatarInput" style="display:none" />
-            </div>
-  </div>
+            <img :src="avatarSrc" alt="Avatar" class="avatar" id="avatar" @click="triggerFileInput">
+            <input type="file" id="avatar-input" accept="image/*" style="display:none" @change="changeAvatar">
+        </div>
+            
         </div>
     </header>
 
@@ -196,103 +190,35 @@
 <script>
 
 export default {
-  
-  
   data() {
     return {
-      avatarSrc: "https://th.bing.com/th/id/OIP.yOD5jRikpBqmzEsOyH4VLAHaHa?rs=1&pid=ImgDetMain", // Đường dẫn của avatar
+      avatarSrc: "", // Để trống ban đầu
     };
   },
-  name: "MentorProfile",
   mounted() {
-    // Initialize jQuery, Bootstrap, Isotope, and other libraries after the component is mounted
-    this.$nextTick(() => {
-      const scriptList = [
-        "https://code.jquery.com/jquery-3.6.0.min.js",
-        "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js",
-        "https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js",
-      ];
-
-      scriptList.forEach((src) => {
-        const script = document.createElement("script");
-        script.src = src;
-        document.body.appendChild(script);
-      });
-
-      // Lấy avatar từ localStorage nếu có
-      const savedAvatar = localStorage.getItem("userAvatar");
-      if (savedAvatar) {
-        this.avatarSrc = savedAvatar;
-      } else {
-        this.avatarSrc = "path/to/default-avatar.jpg"; // Avatar mặc định
-      }
-
-      // Smooth scroll functionality for navbar links
-      $(document).ready(function () {
-        $(".navbar .nav-link").on("click", function (event) {
-          if (this.hash !== "") {
-            event.preventDefault();
-            var hash = this.hash;
-            $("html, body").animate(
-              {
-                scrollTop: $(hash).offset().top,
-              },
-              700,
-              function () {
-                window.location.hash = hash;
-              }
-            );
-          }
-        });
-
-        // Portfolio filters using Isotope
-        $(window).on("load", function () {
-          var t = $(".portfolio-container");
-          t.isotope({
-            filter: ".new",
-            animationOptions: {
-              duration: 750,
-              easing: "linear",
-              queue: false,
-            },
-          });
-
-          $(".filters a").click(function () {
-            $(".filters .active").removeClass("active");
-            $(this).addClass("active");
-            var filterValue = $(this).attr("data-filter");
-
-            t.isotope({
-              filter: filterValue,
-              animationOptions: {
-                duration: 750,
-                easing: "linear",
-                queue: false,
-              },
-            });
-
-            return false;
-          });
-        });
-      });
-    });
+    this.loadAvatar(); // Tải ảnh từ localStorage khi trang được tải lại
   },
   methods: {
-    // Mở input chọn file khi nhấp vào avatar
     triggerFileInput() {
-      this.$refs.avatarInput.click();
+      document.getElementById("avatar-input").click();
     },
-    // Khi người dùng chọn file mới
-    onAvatarChange(event) {
+    changeAvatar(event) {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.avatarSrc = e.target.result; // Hiển thị ảnh mới
-          // Lưu ảnh vào localStorage
-          localStorage.setItem("userAvatar", e.target.result);
+          this.avatarSrc = e.target.result; // Cập nhật ảnh mới
+          localStorage.setItem("avatar", this.avatarSrc); // Lưu ảnh vào localStorage
         };
-        reader.readAsDataURL(file); // Chuyển ảnh thành Data URL
+        reader.readAsDataURL(file); // Đọc file ảnh
+      }
+    },
+    loadAvatar() {
+      const storedAvatar = localStorage.getItem("avatar");
+      if (storedAvatar) {
+        this.avatarSrc = storedAvatar; // Tải ảnh từ localStorage nếu có
+      } else {
+        this.avatarSrc = "https://th.bing.com/th/id/OIP.yOD5jRikpBqmzEsOyH4VLAHaHa?rs=1&pid=ImgDetMain"; // Đường dẫn mặc định
       }
     },
   },

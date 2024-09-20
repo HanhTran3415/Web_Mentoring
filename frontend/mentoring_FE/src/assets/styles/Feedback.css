@@ -1,42 +1,72 @@
 .star-rating {
-    display: inline-flex;
-  }
-  
+  display: inline-flex;
+}
+
+.star {
+  font-size: 2rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.star:hover {
+  color: #fc0;
+}
+
+form textarea {
+  width: calc(100% - 22px);
+  height: 100px;
+  resize: none;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+form a-button {
+  background: #999;
+  padding: 10px 20px;
+  color: #fff;
+  border: 1px solid #999;
+  border-radius: 4px;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+form a-button:hover {
+  background: #fff;
+  color: #666;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .star {
-    font-size: 2rem;
-    color: #ddd;
-    cursor: pointer;
-    transition: color 0.2s;
+    font-size: 1.5rem; /* Giảm kích thước sao cho màn hình nhỏ */
   }
-  
-  .star.filled {
-    color: gold;
-  }
-  
-  .star:hover {
-    color: #fc0;
-  }
-  
+
   form textarea {
-    width: calc(100% - 22px);
-    height: 100px;
-    resize: none;
-    border: 1px solid #999;
-    border-radius: 4px;
-    padding: 10px;
+    height: 80px; /* Giảm chiều cao textarea */
+    padding: 8px; /* Giảm padding trong textarea */
   }
-  
+
   form a-button {
-    background: #999;
-    padding: 10px 20px;
-    color: #fff;
-    border: 1px solid #999;
-    border-radius: 4px;
-    transition: 0.1s;
-    cursor: pointer;
+    padding: 8px 16px; /* Giảm padding cho nút button */
   }
-  
-  form a-button:hover {
-    background: #fff;
-    color: #666;
+}
+
+@media (max-width: 480px) {
+  .star {
+    font-size: 1.2rem; /* Giảm kích thước sao thêm nữa cho màn hình nhỏ hơn */
   }
+
+  form textarea {
+    height: 70px; /* Giảm chiều cao textarea cho màn hình nhỏ hơn */
+  }
+
+  form a-button {
+    padding: 6px 12px; /* Giảm padding thêm cho nút button */
+  }
+}
