@@ -31,12 +31,12 @@
       "contactNo": "0366213027"
     },
     {
-      "id": "c21f",
+      "id": "677a",
       "firstName": "Cong Hieu",
       "lastName": "Phan",
       "username": "hieu123",
-      "password": "Hieu@123",
-      "confirmPassword": "Hieu@123",
+      "password": "Conghieu*123",
+      "confirmPassword": "Conghieu*123",
       "email": "phanconghieu12@gmail.com",
       "contactNo": "0355949570"
     }
