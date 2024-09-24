@@ -92,9 +92,9 @@
                       <img :src="profile.avatar || defaultAvatar" class="rounded-circle">
 
                       <input type="file" ref="fileInput" class="d-none" @change="handleAvatarUpload" />
-                      <div class="upload-icon">
+                      <!-- <div class="upload-icon">
                         <i class="fa fa-upload"></i>
-                      </div>
+                      </div> -->
                     </a>
                   </div>
                 </div>

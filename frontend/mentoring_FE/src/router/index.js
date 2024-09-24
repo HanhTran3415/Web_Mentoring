@@ -83,8 +83,9 @@ const routes = [
   {
     path: '/mentor-info/:id',
     name: 'ProfileMentors',
-    component: ProfileMentors
- 
+    component: ProfileMentors,
+    props: true,
+
   },
 
 

@@ -1,26 +1,20 @@
 <template>
     <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-    
-        <header class="header">
-        <div class="container">  
-            <div class="header-content">
-                <!-- <h4 class="header-subtitle" >Hello, I am</h4> -->
-                <h1 class="header-title">Nguyễn Tấn Huy</h1>
-                <h2 class="header-mono">Giám đốc TRUNG TÂM HUẤN LUYỆN KỸ NĂNG THẾ HỆ TRẺ</h2>
-            </div>
-            <!-- Avatar Section -->
-            <!-- <div class="avatar-wrapper">
-                <img id="avatar" src="https://th.bing.com/th/id/OIP.yOD5jRikpBqmzEsOyH4VLAHaHa?rs=1&pid=ImgDetMain" alt="Avatar" class="avatar">
-                <input type="file" id="avatar-input" accept="image/*" style="display:none">
-            </div> -->
-            <div class="profile-page">
-            <!-- Avatar Section -->
-            <div class="avatar-wrapper">
-            <img :src="avatarSrc" alt="Avatar" class="avatar" id="avatar" @click="triggerFileInput" />
-            <input type="file" id="avatar-input" accept="image/*" @change="onAvatarChange" ref="avatarInput" style="display:none" />
-            </div>
-  </div>
+      <header class="header" ref="header">
+      <div class="container">
+        <div class="header-content">
+          <h1 class="header-title">{{ mentor.name }}</h1>
+          <h2 class="header-mono">{{ mentor.position }}</h2>
         </div>
+        <div class="buttons">
+          <button class="btn btn-primary">Đặt lịch</button>
+          <button class="btn btn-secondary">Theo dõi</button>
+        </div>
+        <div class="avatar-wrapper">
+          <img :src="mentor.avatar" alt="Mentor Avatar" class="avatar" />
+          <input type="file" id="avatar-input" accept="image/*" style="display:none" />
+        </div>
+      </div>
     </header>
 
         <div class="container-fluid">
@@ -186,115 +180,88 @@
             </div>
         </section>
 
-
+        <!-- Floating buttons (visible after scrolling) -->
+      <div v-if="showButtons" class="floating-buttons">
+        <button class="btn btn-primary">Đặt lịch</button>
+        <button class="btn btn-secondary">Theo dõi</button>
+      </div>
+  
+      <!-- Scroll to top button -->
+      <button v-if="showScrollTopButton" @click="scrollToTop" class="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+      </button>
         
 
     </body>
 </template>
 
-
 <script>
-
 export default {
-  
-  
+  props: {
+        id: {
+          type: String,
+          required: true,
+        },
+      },
   data() {
     return {
-      avatarSrc: "https://th.bing.com/th/id/OIP.yOD5jRikpBqmzEsOyH4VLAHaHa?rs=1&pid=ImgDetMain", // Đường dẫn của avatar
+        mentor: {
+
+      },
+      // id: '',
+
+      showButtons: false, 
+      showScrollTopButton: false,
     };
   },
-  name: "MentorProfile",
   mounted() {
-    // Initialize jQuery, Bootstrap, Isotope, and other libraries after the component is mounted
-    this.$nextTick(() => {
-      const scriptList = [
-        "https://code.jquery.com/jquery-3.6.0.min.js",
-        "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js",
-        "https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js",
-      ];
+    this.loadAvatar(); 
+    window.addEventListener("scroll", this.handleScroll); 
+  },
+  beforeDestroy() {
+      window.removeEventListener('scroll', this.handleScroll); 
+    },
+    async created() {
+    try {
+      // Use this.id directly from props
+      const response = await fetch(`https://6w35hlsj-3001.asse.devtunnels.ms/mentor/${this.id}`);
 
-      scriptList.forEach((src) => {
-        const script = document.createElement("script");
-        script.src = src;
-        document.body.appendChild(script);
-      });
-
-      // Lấy avatar từ localStorage nếu có
-      const savedAvatar = localStorage.getItem("userAvatar");
-      if (savedAvatar) {
-        this.avatarSrc = savedAvatar;
+      if (response.ok) {
+        const mentorData = await response.json();
+        if (mentorData) {
+          this.mentor = mentorData; // Directly assign if it's an object
+        }
       } else {
-        this.avatarSrc = "path/to/default-avatar.jpg"; // Avatar mặc định
+        console.error('Lỗi khi tải dữ liệu mentor:', response.statusText);
       }
-
-      // Smooth scroll functionality for navbar links
-      $(document).ready(function () {
-        $(".navbar .nav-link").on("click", function (event) {
-          if (this.hash !== "") {
-            event.preventDefault();
-            var hash = this.hash;
-            $("html, body").animate(
-              {
-                scrollTop: $(hash).offset().top,
-              },
-              700,
-              function () {
-                window.location.hash = hash;
-              }
-            );
-          }
-        });
-
-        // Portfolio filters using Isotope
-        $(window).on("load", function () {
-          var t = $(".portfolio-container");
-          t.isotope({
-            filter: ".new",
-            animationOptions: {
-              duration: 750,
-              easing: "linear",
-              queue: false,
-            },
-          });
-
-          $(".filters a").click(function () {
-            $(".filters .active").removeClass("active");
-            $(this).addClass("active");
-            var filterValue = $(this).attr("data-filter");
-
-            t.isotope({
-              filter: filterValue,
-              animationOptions: {
-                duration: 750,
-                easing: "linear",
-                queue: false,
-              },
-            });
-
-            return false;
-          });
-        });
-      });
-    });
+    } catch (error) {
+      console.error('Lỗi khi gửi yêu cầu:', error);
+    }
   },
   methods: {
-    // Mở input chọn file khi nhấp vào avatar
-    triggerFileInput() {
-      this.$refs.avatarInput.click();
-    },
-    // Khi người dùng chọn file mới
-    onAvatarChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.avatarSrc = e.target.result; // Hiển thị ảnh mới
-          // Lưu ảnh vào localStorage
-          localStorage.setItem("userAvatar", e.target.result);
-        };
-        reader.readAsDataURL(file); // Chuyển ảnh thành Data URL
+    loadAvatar() {
+      const storedAvatar = localStorage.getItem("avatar");
+      if (storedAvatar) {
+        this.avatarSrc = storedAvatar; 
+      } else {
+        this.avatarSrc = "https://th.bing.com/th/id/OIP.yOD5jRikpBqmzEsOyH4VLAHaHa?rs=1&pid=ImgDetMain"; // Đường dẫn mặc định
       }
     },
+    handleScroll() {
+      const headerHeight = this.$refs.header.offsetHeight; 
+      const scrollY = window.scrollY;
+
+      this.showButtons = scrollY > headerHeight;
+      
+      this.showScrollTopButton = scrollY > headerHeight;
+    },
+    scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+    },
+
   },
 };
 </script>
@@ -302,4 +269,5 @@ export default {
 <style scoped>
 @import './assets/css/johndoe.css';
 @import './assets/vendors/themify-icons/css/themify-icons.css';
+
 </style>

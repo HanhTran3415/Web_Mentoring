@@ -387,5 +387,161 @@
 }
 
 
+/* Responsive cho nav */
+@media (max-width: 750px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
 
+  .nav-items {
+    width: 100%;
+    flex-direction: column;
+    transform: translateX(0); /* Hiện menu khi mở */
+  }
 
+  .nav-item-list li {
+    margin: 0.5rem 0; /* Cách nhau cho các mục */
+  }
+}
+
+/* Responsive cho slider */
+@media (max-width: 600px) {
+  .slider-image {
+    height: 400px; /* Giảm chiều cao cho màn hình nhỏ */
+  }
+
+  .prev, .next {
+    width: 40px; /* Giảm kích thước nút điều hướng */
+    height: 40px;
+    font-size: 2rem;
+  }
+}
+
+/* Responsive cho search bar */
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column; /* Đặt các phần tử thành cột */
+    padding: 10px;
+  }
+
+  .search-bar input {
+    max-width: 100%; /* Đảm bảo ô tìm kiếm chiếm toàn bộ chiều rộng */
+  }
+
+  .search-bar h1 {
+    font-size: 18px; /* Giảm kích thước chữ */
+  }
+}
+
+/* Responsive cho mentor cards */
+@media (max-width: 1024px) {
+  .mentor-cards {
+    grid-template-columns: repeat(3, 1fr); /* Giảm số cột còn 3 */
+  }
+}
+
+@media (max-width: 768px) {
+  .mentor-cards {
+    grid-template-columns: repeat(2, 1fr); /* Giảm số cột còn 2 */
+  }
+}
+
+@media (max-width: 480px) {
+  .mentor-cards {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for mobile devices */
+  }
+
+  .mentor-card {
+    width: 100%; /* Ensure the card takes full width */
+  }
+
+  .mentor-avatar {
+    width: auto; /* Adjust avatar size for smaller screens */
+    height: auto; /* Maintain aspect ratio */
+  }
+}
+
+/* Responsive cho pagination */
+@media (max-width: 768px) {
+  .mentor-cards {
+    grid-template-columns: repeat(3, 1fr); 
+    margin-right: 50px;
+  }
+  .pagination {
+    flex-direction: column; /* Đặt các nút phân trang thành cột */
+    align-items: flex-start; /* Căn lề trái */
+  }
+
+  .pagination-button {
+    font-size: 30px; /* Giảm kích thước chữ */
+  }
+
+  .pagination-page {
+    width: auto; 
+    font-size: 14px; 
+  }
+  .mentor-card h2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: black;
+  }
+  .connect-button {
+    padding: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: #007bff;
+    background-color: #ffffff;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    justify-content: center;
+    
+    height: 30px;
+    width:50px
+    
+  }
+}
+@media (max-width: 768px) {
+  .mentor-details {
+    display: none;
+  }
+}
+
+/* Responsive cho slider */
+@media (max-width: 600px) {
+  .slider-image {
+    max-height: 400px; /* Giảm chiều cao tối đa cho màn hình nhỏ */
+    width: auto; /* Đặt chiều rộng tự động để giữ tỷ lệ */
+    height: auto; /* Đặt chiều cao tự động để giữ tỷ lệ */
+    object-fit: contain; /* Đảm bảo hình ảnh không bị cắt bớt và giữ nguyên tỷ lệ */
+  }
+
+  .prev, .next {
+    width: 40px; /* Giảm kích thước nút điều hướng */
+    height: 40px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    display: flex; /* Sử dụng flexbox */
+    flex-direction: row; /* Đặt các nút phân trang thành hàng */
+    justify-content: center; /* Căn giữa các nút */
+    align-items: center; /* Căn giữa theo chiều dọc */
+  }
+
+  .pagination-button {
+    font-size: 30px; 
+    margin: 0 5px; /* Tạo khoảng cách giữa các nút */
+  }
+
+  .pagination-page {
+    width: 50px; 
+    font-size: 14px; 
+  }
+}
