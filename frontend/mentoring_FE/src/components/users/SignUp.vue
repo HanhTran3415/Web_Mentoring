@@ -139,11 +139,11 @@ export default {
     //     return;
     //   }
 
-      // Kiểm tra sự tồn tại của email và số điện thoại
-      try {
-        const response = await fetch('http://localhost:3000/register');
-        if (response.ok) {
-          const data = await response.json();
+      // // Kiểm tra sự tồn tại của email và số điện thoại
+      // try {
+      //   const response = await fetch('http://localhost:3000/register');
+      //   if (response.ok) {
+      //     const data = await response.json();
 
     //       // Kiểm tra email và số điện thoại đã tồn tại
     //       const emailExists = data.some(user => user.email === this.form.email);
@@ -159,16 +159,16 @@ export default {
     //         isValid = false;
     //       }
 
-          if (!isValid) return;
+          // if (!isValid) return;
 
-          // Gửi yêu cầu đăng ký nếu không có lỗi
-          const registerResponse = await fetch('http://localhost:3000/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.form),
-          });
+          // // Gửi yêu cầu đăng ký nếu không có lỗi
+          // const registerResponse = await fetch('http://localhost:3000/register', {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //   },
+          //   body: JSON.stringify(this.form),
+          // });
 
     //       if (registerResponse.ok) {
     //         this.successMessage = true;
@@ -205,7 +205,7 @@ export default {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch('http://localhost:3005/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

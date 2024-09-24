@@ -1,0 +1,34 @@
+[
+  {
+    "firstName": "Cong Hieu",
+    "lastName": "Phan",
+    "username": "hieu123",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$yy0ZKCN9vHHj0Dk6ON4oPA$GEvMprMJ0B3pWevTjnnOrxlXbfW8A4u9tQr7ssN4gGg",
+    "email": "phanconghieu12@gmail.com",
+    "contactNo": "0355949570"
+  },
+  {
+    "firstName": "Cong Hieu",
+    "lastName": "Phan",
+    "username": "phancongcongvip",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$Mkd8HmtF+Y4kIgQGAqniqg$upJGOgzEvxrr10a9zIQN3ZIRIP4zw/vNmCJaojQObq0",
+    "email": "phanconghieu29@gmail.com",
+    "contactNo": "0355949571"
+  },
+  {
+    "firstName": "Nguyen ",
+    "lastName": "A",
+    "username": "abc",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$QSYITc1ZojgWz7d1jllDrw$8kWXpb5ABrDijwDyDWN2vO4/7jsyK4QX4NPos7r26uw",
+    "email": "abc@gmail.com",
+    "contactNo": "0355949574"
+  },
+  {
+    "firstName": "Trần",
+    "lastName": "Hạnh",
+    "username": "admin",
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$z2fY83somTQO3HZbSBYOxQ$psP8trEunLaKH5lKeCir63FU2ZyN2Ze8rMrWoFcLCIw",
+    "email": "hanhtran0415@gmail.com",
+    "contactNo": "0366213027"
+  }
+]
