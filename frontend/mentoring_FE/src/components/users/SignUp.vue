@@ -183,7 +183,7 @@ export default {
 
             // Kiểm tra sự tồn tại của email và số điện thoại
             try {
-                const response = await fetch('http://localhost:3000/register');
+                const response = await fetch('https://6w35hlsj-3000.asse.devtunnels.ms/register');
                 if (response.ok) {
                     const data = await response.json();
 
@@ -204,7 +204,7 @@ export default {
                     if (!isValid) return;
 
                     // Gửi yêu cầu đăng ký nếu không có lỗi
-                    const registerResponse = await fetch('http://localhost:3000/register', {
+                    const registerResponse = await fetch('https://6w35hlsj-3000.asse.devtunnels.ms/register', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

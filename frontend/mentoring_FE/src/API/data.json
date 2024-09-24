@@ -29,6 +29,16 @@
       "confirmPassword": "hanhtran03@",
       "email": "hanhtran0415@gmail.com",
       "contactNo": "0366213027"
+    },
+    {
+      "id": "c21f",
+      "firstName": "Cong Hieu",
+      "lastName": "Phan",
+      "username": "hieu123",
+      "password": "Hieu@123",
+      "confirmPassword": "Hieu@123",
+      "email": "phanconghieu12@gmail.com",
+      "contactNo": "0355949570"
     }
   ],
   "admin": [
