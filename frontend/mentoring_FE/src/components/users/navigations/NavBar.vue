@@ -11,11 +11,15 @@
         decoding="async"
       />
     </div>
-    <div class="menu-toggle" id="menuToggle" @click="toggleMenu">
+
+    <!-- Hamburger Menu for Small Screens -->
+    <div class="menu-toggle" @click="toggleMenu">
       <div></div>
       <div></div>
       <div></div>
     </div>
+
+    <!-- Navigation Items -->
     <div class="nav-items" :class="{ active: dropdownOpen }">
       <ul class="nav-item-list">
         <li @click="navigateToHome">
@@ -38,8 +42,8 @@
             </svg>
           </a>
           <ul class="dropdown-menu" v-if="dropdownOpen">
-            <h1 class="display-2 text-white greetings" @click="navigateToProfile">
-              <b class="greetings">Xin chào</b> <br>
+            <h1 class="greetings" @click="navigateToProfile">
+              <b>Xin chào</b> <br>
               <b>{{ profile.firstName }} {{ profile.lastName }}</b>
             </h1>
             <li><a href="#" @click="navigateToPricingTable"><i class="bi bi-gear-fill"></i> Đặt lịch tư vấn</a></li>
@@ -62,7 +66,7 @@ export default {
         firstName: '',
         lastName: ''
       },
-      dropdownOpen: false // Track the state of the dropdown
+      dropdownOpen: false
     };
   },
   methods: {
@@ -110,7 +114,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 @import '@/assets/styles/navbar.css';
 </style>

@@ -107,6 +107,7 @@ footer {
     text-align: center; /* Căn giữa văn bản */
     margin-left: 0; /* Xóa margin bên trái */
   }
+  
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {

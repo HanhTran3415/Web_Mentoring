@@ -104,18 +104,30 @@
       </router-link>
       
       <h2>{{ mentor.name }}</h2>
-      <p class="info"><i class="fas fa-briefcase icon"></i> {{ mentor.position }}</p> <!-- Chức vụ -->
-      <p class="info"><i class="fas fa-graduation-cap icon"></i> {{ mentor.Major }}</p> <!-- Chuyên môn -->
-      <p class="info"><i class="fas fa-user-tie icon"></i> {{ mentor.mentee }} mentees</p> <!-- Mentor -->
-      <p class="info"><i class="fas fa-calendar-day icon"></i> {{ mentor.FreeTime }}</p>
+      <p v-if="isDesktopOrTablet" class="info">
+        <i class="fas fa-briefcase icon"></i> {{ mentor.position }}
+      </p>
+      <p v-if="isDesktopOrTablet" class="info">
+        <i class="fas fa-graduation-cap icon"></i> {{ mentor.Major }}
+      </p>
+      <p v-if="isDesktopOrTablet" class="info">
+        <i class="fas fa-user-tie icon"></i> {{ mentor.mentee }} mentees
+      </p>
+      <p v-if="isDesktopOrTablet" class="info">
+        <i class="fas fa-calendar-day icon"></i> {{ mentor.FreeTime }}
+      </p>
 
       <!-- Nút Kết nối -->
-      <button @click="connectMentor(mentor)" class="connect-button">
+      <div class="parent-container">
+        <button @click="connectMentor(mentor)" class="connect-button">
         Kết nối
-      </button>
+        </button>
+      </div>
+      
 
-      <!-- Hiển thị chi tiết mentor -->
-      <div v-if="activeMentorId === mentor.id" class="mentor-details">
+      <div 
+        v-if="activeMentorId === mentor.id && !isMobile" 
+        class="mentor-details">
         <h2>Chi tiết</h2>
         <p><strong>Giới thiệu bản thân:</strong> {{ details[mentor.id]?.content }}</p>
         <div v-for="(value, key) in details[mentor.id]?.['Chủ đề Mentoring']" :key="key">
@@ -194,23 +206,28 @@ export default {
         "https://hubsaigon.vn/wp-content/uploads/2024/08/KHOI-NGHIEP-THUC-CHIEN-1.png",
         "https://hubsaigon.vn/wp-content/uploads/2024/08/PROMT-AI-CONG-SO.jpg"
       ],
-      sliderInterval: null, // Interval for automatic sliding
+      sliderInterval: null, 
+      isDesktopOrTablet: window.innerWidth > 480,
+      details: {},
     };
   },
   mounted() {
+    
     this.startSlider();
     this.scrollToTop();
+    window.addEventListener('resize', this.handleResize);
   },
   beforeDestroy() {
     this.stopSlider();
+    window.removeEventListener('resize', this.handleResize);
   },
     
   
 
   async created() {
     try {
-      const mentorResponse = await fetch('http://localhost:3001/mentor');
-      const detailsResponse = await fetch('http://localhost:3001/details');
+      const mentorResponse = await fetch('https://6w35hlsj-3001.asse.devtunnels.ms/mentor');
+      const detailsResponse = await fetch('https://6w35hlsj-3001.asse.devtunnels.ms/details');
       
       if (mentorResponse.ok && detailsResponse.ok) {
         this.mentors = await mentorResponse.json();
@@ -228,6 +245,9 @@ export default {
   },
 
   computed: {
+    isMobile() {
+      return window.innerWidth <= 768; // Kiểm tra kích thước màn hình
+    },
     filteredMentors() {
       return this.mentors.filter(mentor => {
         const nameMatch = mentor.name.toLowerCase().includes(this.searchName.toLowerCase());
@@ -276,6 +296,9 @@ export default {
     },
     hideDetails() {
       this.activeMentorId = null;
+    },
+    handleResize() {
+      this.$forceUpdate(); // Cập nhật component khi kích thước màn hình thay đổi
     },
     prevPage() {
       if (this.currentPage > 1) {

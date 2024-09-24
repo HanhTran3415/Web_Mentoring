@@ -1,20 +1,20 @@
 <template>
     <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-    
-        <header class="header">
-        <div class="container">  
-            <div class="header-content">
-                <!-- <h4 class="header-subtitle" >Hello, I am</h4> -->
-                <h1 class="header-title">Nguyễn Tấn Huy</h1>
-                <h2 class="header-mono">Giám đốc TRUNG TÂM HUẤN LUYỆN KỸ NĂNG THẾ HỆ TRẺ</h2>
-            </div>
-            <!-- Avatar Section -->
-            <div class="avatar-wrapper">
-            <img :src="avatarSrc" alt="Avatar" class="avatar" id="avatar" @click="triggerFileInput">
-            <input type="file" id="avatar-input" accept="image/*" style="display:none" @change="changeAvatar">
+      <header class="header" ref="header">
+      <div class="container">
+        <div class="header-content">
+          <h1 class="header-title">{{ mentor.name }}</h1>
+          <h2 class="header-mono">{{ mentor.position }}</h2>
         </div>
-            
+        <div class="buttons">
+          <button class="btn btn-primary">Đặt lịch</button>
+          <button class="btn btn-secondary">Theo dõi</button>
         </div>
+        <div class="avatar-wrapper">
+          <img :src="mentor.avatar" alt="Mentor Avatar" class="avatar" />
+          <input type="file" id="avatar-input" accept="image/*" style="display:none" />
+        </div>
+      </div>
     </header>
 
         <div class="container-fluid">
@@ -180,47 +180,88 @@
             </div>
         </section>
 
-
+        <!-- Floating buttons (visible after scrolling) -->
+      <div v-if="showButtons" class="floating-buttons">
+        <button class="btn btn-primary">Đặt lịch</button>
+        <button class="btn btn-secondary">Theo dõi</button>
+      </div>
+  
+      <!-- Scroll to top button -->
+      <button v-if="showScrollTopButton" @click="scrollToTop" class="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+      </button>
         
 
     </body>
 </template>
 
-
 <script>
-
 export default {
+  props: {
+        id: {
+          type: String,
+          required: true,
+        },
+      },
   data() {
     return {
-      avatarSrc: "", // Để trống ban đầu
+        mentor: {
+
+      },
+      // id: '',
+
+      showButtons: false, 
+      showScrollTopButton: false,
     };
   },
   mounted() {
-    this.loadAvatar(); // Tải ảnh từ localStorage khi trang được tải lại
+    this.loadAvatar(); 
+    window.addEventListener("scroll", this.handleScroll); 
+  },
+  beforeDestroy() {
+      window.removeEventListener('scroll', this.handleScroll); 
+    },
+    async created() {
+    try {
+      // Use this.id directly from props
+      const response = await fetch(`https://6w35hlsj-3001.asse.devtunnels.ms/mentor/${this.id}`);
+
+      if (response.ok) {
+        const mentorData = await response.json();
+        if (mentorData) {
+          this.mentor = mentorData; // Directly assign if it's an object
+        }
+      } else {
+        console.error('Lỗi khi tải dữ liệu mentor:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Lỗi khi gửi yêu cầu:', error);
+    }
   },
   methods: {
-    triggerFileInput() {
-      document.getElementById("avatar-input").click();
-    },
-    changeAvatar(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.avatarSrc = e.target.result; // Cập nhật ảnh mới
-          localStorage.setItem("avatar", this.avatarSrc); // Lưu ảnh vào localStorage
-        };
-        reader.readAsDataURL(file); // Đọc file ảnh
-      }
-    },
     loadAvatar() {
       const storedAvatar = localStorage.getItem("avatar");
       if (storedAvatar) {
-        this.avatarSrc = storedAvatar; // Tải ảnh từ localStorage nếu có
+        this.avatarSrc = storedAvatar; 
       } else {
         this.avatarSrc = "https://th.bing.com/th/id/OIP.yOD5jRikpBqmzEsOyH4VLAHaHa?rs=1&pid=ImgDetMain"; // Đường dẫn mặc định
       }
     },
+    handleScroll() {
+      const headerHeight = this.$refs.header.offsetHeight; 
+      const scrollY = window.scrollY;
+
+      this.showButtons = scrollY > headerHeight;
+      
+      this.showScrollTopButton = scrollY > headerHeight;
+    },
+    scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+    },
+
   },
 };
 </script>
@@ -228,4 +269,5 @@ export default {
 <style scoped>
 @import './assets/css/johndoe.css';
 @import './assets/vendors/themify-icons/css/themify-icons.css';
+
 </style>

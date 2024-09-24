@@ -59,7 +59,8 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        const response = await fetch('http://localhost:3000/register', {
+        // const response = await fetch('http://localhost:3000/register'
+        const response = await fetch('https://6w35hlsj-3000.asse.devtunnels.ms/register', {
           method: 'GET', // Thay đổi phương thức thành GET để lấy danh sách người dùng
           headers: {
             'Content-Type': 'application/json',
