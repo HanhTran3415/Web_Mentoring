@@ -19,24 +19,15 @@
           <form @submit.prevent="handleLogin">
             <div class="input_field">
               <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-              <input 
-                v-model="email"
-                type="email" 
-                placeholder="Email" 
-                required 
-              />
+              <input v-model="email" type="email" placeholder="Email" required />
             </div>
             <div class="input_field">
               <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-              <input 
-                v-model="password"
-                type="password" 
-                placeholder="Password" 
-                required 
-              />
+              <input v-model="password" type="password" placeholder="Password" required />
             </div>
             <input class="button" type="submit" value="Đăng nhập" />
-            <p>Chưa có tài khoản?</p><span style="font-weight: bold;"><router-link to="/"> Đăng ký ngay</router-link></span>
+            <p>Chưa có tài khoản?</p><span style="font-weight: bold;"><router-link to="/"> Đăng ký
+                ngay</router-link></span>
           </form>
           <p v-if="errorMessage" class="error_message">{{ errorMessage }}</p>
         </div>
@@ -59,34 +50,36 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        // const response = await fetch('http://localhost:3000/register'
-        const response = await fetch('https://6w35hlsj-3000.asse.devtunnels.ms/register', {
-          method: 'GET', // Thay đổi phương thức thành GET để lấy danh sách người dùng
+        const response = await fetch('http://localhost:3005/login', {
+          method: 'POST', // Sử dụng POST để gửi thông tin đăng nhập
           headers: {
             'Content-Type': 'application/json',
           },
+          body: JSON.stringify({
+            email: this.email, // Nếu bạn sử dụng email làm tên đăng nhập
+            password: this.password,
+          }),
         });
 
         if (response.ok) {
           const data = await response.json();
+          console.log('Login response data:', data);
+          // Lưu thông tin người dùng vào localStorage
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          // // Điều hướng đến trang Home sau khi đăng nhập thành công
+          // this.$router.push('/home');
 
-          // Kiểm tra thông tin đăng nhập
-          const user = data.find(user => user.email === this.email);
-          
-          if (user) {
-            if (user.password === this.password) {
-              
-              localStorage.setItem('currentUser', JSON.stringify(user));
-              // Điều hướng đến trang Home sau khi đăng nhập thành công
-              this.$router.push('/home');
-            } else {
-              this.errorMessage = 'Mật khẩu không đúng!';
-            }
+          // Kiểm tra role của người dùng và điều hướng tương ứng
+          if (data.role === 'user') {
+            this.$router.push('/home');
+          } else if (data.role === 'admin') {
+            this.$router.push('/dashboard');
           } else {
-            this.errorMessage = 'Email không tồn tại!';
+            this.errorMessage = 'Role không xác định';
           }
         } else {
-          this.errorMessage = 'Lỗi kết nối đến server!';
+          const errorData = await response.json();
+          this.errorMessage = errorData.message; // Hiển thị thông báo lỗi từ server
         }
       } catch (error) {
         console.error('Lỗi khi gửi dữ liệu:', error);
@@ -97,6 +90,7 @@ export default {
       this.isAnimated = !this.isAnimated;
     },
   },
+
 };
 </script>
 
