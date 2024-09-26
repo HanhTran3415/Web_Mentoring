@@ -124,6 +124,23 @@
         </button>
       </div>
       
+    <!-- Popup Form -->
+      <div v-if="showPopup" class="popup-overlay" @click="closePopup">
+        <div class="popup-form" @click.stop>
+          <div class="form-header">
+            <img :src="avatarUrl" alt="Avatar" class="avatar" />
+            <div class="user-info">
+              <h2>{{ userName }}</h2>
+            </div>
+          </div>
+          <div class="form-body">
+            <textarea v-model="connectionReason" placeholder="Nhập lý do kết nối..."></textarea>
+          </div>
+          <div class="form-footer">
+            <button @click="submitForm">Gửi</button>
+          </div>
+        </div>
+      </div>
 
       <div 
         v-if="activeMentorId === mentor.id && !isMobile" 
@@ -186,6 +203,10 @@ export default {
         type: ''
 
       },
+      showPopup: false,
+      avatarUrl: "",
+      userName: "",
+      connectionReason: "",
       selectedTab: 'documents', // Controls the selected tab group
       activeMentorTab: 'mentor-marketing', // Default active sub-tab for Mentor
       mentorFields: [
@@ -209,6 +230,7 @@ export default {
       sliderInterval: null, 
       isDesktopOrTablet: window.innerWidth > 480,
       details: {},
+      
     };
   },
   mounted() {
@@ -267,6 +289,25 @@ export default {
   },
   
   methods: {
+    // Hiển thị popup và nhận thông tin mentor
+    connectMentor(mentor) {
+    this.avatarUrl = mentor.avatar; // Gán avatar của mentor từ mentor.avatar
+    this.userName = mentor.name; // Gán tên của mentor
+    this.showPopup = true; // Hiển thị popup
+    this.activeMentorId = null; // Ẩn chi tiết mentor
+    
+  },
+    
+    // Đóng popup
+    closePopup() {
+      this.showPopup = false;
+    },
+    
+    // Xử lý form khi nhấn gửi
+    submitForm() {
+      console.log("Lý do kết nối:", this.connectionReason);
+      this.closePopup(); // Đóng popup sau khi gửi
+    },
     showMentorTabs() {
       this.selectedTab = 'mentor';
     },
@@ -327,42 +368,42 @@ export default {
         behavior: 'smooth'
       });
     },
-    async connectMentor(mentor) {
-      const connectionData = {
-        userId: this.currentUser.id,
-        userName: this.currentUser.name,
-        userEmail: this.currentUser.email,
-        mentorId: mentor.id,
-        mentorName: mentor.name,
-        mentorEmail: mentor.email || '',
-        timestamp: new Date().toISOString()
-      };
+    // async connectMentor(mentor) {
+    //   const connectionData = {
+    //     userId: this.currentUser.id,
+    //     userName: this.currentUser.name,
+    //     userEmail: this.currentUser.email,
+    //     mentorId: mentor.id,
+    //     mentorName: mentor.name,
+    //     mentorEmail: mentor.email || '',
+    //     timestamp: new Date().toISOString()
+    //   };
 
-      try {
-        const response = await fetch('http://localhost:4000/matching', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(connectionData)
-        });
+    //   try {
+    //     const response = await fetch('http://localhost:4000/matching', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify(connectionData)
+    //     });
 
-        if (response.ok) {
-          this.notification = {
-            message: `Đã gửi yêu cầu kết nối tới ${mentor.name} thành công!`,
-            type: 'success'
-          };
-        } else {
-          throw new Error('Không thể kết nối tới server');
-        }
-      } catch (error) {
-        console.error('Lỗi khi gửi yêu cầu kết nối:', error);
-        this.notification = {
-          message: 'Đã xảy ra lỗi khi gửi yêu cầu kết nối. Vui lòng thử lại sau.',
-          type: 'error'
-        };
-      }
-    }
+    //     if (response.ok) {
+    //       this.notification = {
+    //         message: `Đã gửi yêu cầu kết nối tới ${mentor.name} thành công!`,
+    //         type: 'success'
+    //       };
+    //     } else {
+    //       throw new Error('Không thể kết nối tới server');
+    //     }
+    //   } catch (error) {
+    //     console.error('Lỗi khi gửi yêu cầu kết nối:', error);
+    //     this.notification = {
+    //       message: 'Đã xảy ra lỗi khi gửi yêu cầu kết nối. Vui lòng thử lại sau.',
+    //       type: 'error'
+    //     };
+    //   }
+    // }
   }
 };
 </script>

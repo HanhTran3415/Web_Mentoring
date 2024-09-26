@@ -12,6 +12,7 @@ import Dashboad from '@/components/admin/Dashboard.vue';
 import Table from '@/components/admin/Table.vue';
 import MentorProfile from '@/components/users/MentorProfile.vue';
 import ProfileMentors from '@/components/mentors/ProfileMentors.vue';
+// import PopUpForm from '@/components/users/PopUpForm.vue';
 
 // import Tablementee from '@/components/admin/Components/Tablementee.vue';
 //import MentorPage from '@/components/users/Mentor.vue';
@@ -74,6 +75,12 @@ const routes = [
     component: Table
  
   },
+  // {
+  //   path: '/popup',
+  //   name: 'PopUp',
+  //   component: PopUpForm
+ 
+  // },
   {
     path: '/mentorprofile',
     name: 'MentorProfile',
