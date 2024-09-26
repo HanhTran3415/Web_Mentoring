@@ -84,7 +84,6 @@ const routes = [
         component: ProfileMentors,
         props: true,
     },
-
     {
         path: "/:catchAll(.*)",
         redirect: "/login",
