@@ -72,8 +72,6 @@ export default {
           // Kiểm tra role của người dùng và điều hướng tương ứng
           if (data.role === 'user') {
             this.$router.push('/home');
-          } else if (data.role === 'mentor') {
-            this.$router.push('/mentorprofile');
           } else if (data.role === 'admin') {
             this.$router.push('/dashboard');
           } else {
