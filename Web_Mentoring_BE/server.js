@@ -43,6 +43,7 @@ app.post("/register", async (req, res) => {
             password: hashedPassword,
             email,
             contactNo,
+            role: "user",
         };
         users.push(newUser);
 
@@ -79,12 +80,19 @@ app.post("/login", async (req, res) => {
                 .json({ message: "Mật khẩu không chính xác!" });
         }
 
-        res.status(200).json({ message: "Đăng nhập thành công" });
+        // res.status(200).json({ message: "Đăng nhập thành công" });
+
+        // Trả về thông tin người dùng cùng với role
+        res.status(200).json({
+            message: "Đăng nhập thành công",
+            email: user.email,
+            role: user.role,
+        });
     } catch (error) {
         res.status(500).json({ message: "Đã xảy ra lỗi!" });
     }
 });
 
 app.listen(3005, () => {
-    console.log("Server đang chạy trên cổng 3000");
+    console.log("Server đang chạy trên cổng 3005");
 });

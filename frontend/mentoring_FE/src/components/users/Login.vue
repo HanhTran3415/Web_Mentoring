@@ -47,46 +47,6 @@ export default {
       isAnimated: false, // Dùng để điều khiển hoạt ảnh
     };
   },
-  // methods: {
-  //   async handleLogin() {
-  //     try {
-  //       const response = await fetch('http://localhost:3000/register', {
-  //         method: 'GET', // Thay đổi phương thức thành GET để lấy danh sách người dùng
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       });
-
-  //       if (response.ok) {
-  //         const data = await response.json();
-
-  //         // Kiểm tra thông tin đăng nhập
-  //         const user = data.find(user => user.email === this.email);
-
-  //         if (user) {
-  //           if (user.password === this.password) {
-
-  //             localStorage.setItem('currentUser', JSON.stringify(user));
-  //             // Điều hướng đến trang Home sau khi đăng nhập thành công
-  //             this.$router.push('/home');
-  //           } else {
-  //             this.errorMessage = 'Mật khẩu không đúng!';
-  //           }
-  //         } else {
-  //           this.errorMessage = 'Email không tồn tại!';
-  //         }
-  //       } else {
-  //         this.errorMessage = 'Lỗi kết nối đến server!';
-  //       }
-  //     } catch (error) {
-  //       console.error('Lỗi khi gửi dữ liệu:', error);
-  //       this.errorMessage = 'Đã xảy ra lỗi!';
-  //     }
-  //   },
-  //   toggleAnimation() {
-  //     this.isAnimated = !this.isAnimated;
-  //   },
-  // },
   methods: {
     async handleLogin() {
       try {
@@ -103,10 +63,22 @@ export default {
 
         if (response.ok) {
           const data = await response.json();
+          console.log('Login response data:', data);
           // Lưu thông tin người dùng vào localStorage
           localStorage.setItem('currentUser', JSON.stringify(data));
-          // Điều hướng đến trang Home sau khi đăng nhập thành công
-          this.$router.push('/home');
+          // // Điều hướng đến trang Home sau khi đăng nhập thành công
+          // this.$router.push('/home');
+
+          // Kiểm tra role của người dùng và điều hướng tương ứng
+          if (data.role === 'user') {
+            this.$router.push('/home');
+          } else if (data.role === 'mentor') {
+            this.$router.push('/mentorprofile');
+          } else if (data.role === 'admin') {
+            this.$router.push('/dashboard');
+          } else {
+            this.errorMessage = 'Role không xác định';
+          }
         } else {
           const errorData = await response.json();
           this.errorMessage = errorData.message; // Hiển thị thông báo lỗi từ server
